@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>离别</title>
+    <link rel="shortcut  icon" href="./favicon.ico" type="image/x-icon"/>
+    <style>
+        body {
+            overflow-y: hidden;
+            width: 100%;
+            height: 100vh;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+    </style>
+    <link rel="stylesheet" href="./font.css">
+</head>
+<body style="background: url('./bg.png');background-repeat: no-repeat;background-size: cover;">
+<div style="position: fixed;top: 50%;transform: translateY(-50%);width: 100%;">
+    <div class="intro" style="margin: auto;text-align: center;">
+        <p style="color: white;font-size: 7vmin;font-family: pangmen;">离开是为了更好的前行</p>
+        <p style="color: white;font-size: 3vmin;">愿来年之时，能与诸君共谈笑</p>
+        <p style="color: white;font-size: 3vmin;">By <b>不可溶的碳酸氢盐</b></p>
+        <p style="color: white;font-size: 2.5vmin;"><b>距2023年高考</b></p>
+    </div>
+    <div style="margin: auto;color: white;font-size: 3vmin;display: flex;justify-content: space-around;">
+        <div style="text-align: center">
+    <span style="font-size: 5vmin;" id="day">
+        0
+    </span>
+            <br>Days
+        </div>
+        <div style="text-align: center">
+    <span style="font-size: 5vmin;" id="hour">
+        0
+    </span>
+            <br>Hours
+        </div>
+        <div style="text-align: center">
+    <span style="font-size: 5vmin;" id="min">
+        0
+    </span>
+            <br>Minutes
+        </div>
+        <div style="text-align: center">
+    <span style="font-size: 5vmin;" id="sec">
+        0
+    </span>
+            <br>Seconds
+        </div>
+
+    </div>
+</div>
+
+</body>
+<script>
+    var target_time = new Date("2023/06/07");
+
+    var day_ele = document.getElementById("day");
+    var hour_ele = document.getElementById("hour");
+    var min_ele = document.getElementById("min");
+    var sec_ele = document.getElementById("sec");
+
+    function countDown() {
+        var reduce_ms = target_time.getTime() - Date.now();
+        return {
+            day: parseInt(reduce_ms / 1000 / 3600 / 24),
+            hour: parseInt(reduce_ms / 1000 / 3600),
+            min: parseInt(reduce_ms / 1000 / 60 % 60),
+            sec: Math.round(reduce_ms / 1000 % 60)
+        }
+    }
+
+    function renderCountDown() {
+        var res = countDown();
+        day_ele.innerHTML = addZero(res.day);
+        hour_ele.innerHTML = addZero(res.hour);
+        min_ele.innerHTML = addZero(res.min);
+        sec_ele.innerHTML = addZero(res.sec);
+        setTimeout(renderCountDown, 1000)
+    }
+
+    function addZero(num) {
+        if (num < 10) {
+            return "0" + num;
+        }
+        return num;
+    }
+
+    renderCountDown()
+</script>
+</html>
